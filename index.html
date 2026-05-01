@@ -170,7 +170,6 @@
     .nav-link:hover { color: var(--cream); }
     .nav-link:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
     
-    }
     @keyframes pulse-ring {
       0%   { transform: scale(1); opacity: 1; }
       100% { transform: scale(1.9); opacity: 0; }
@@ -476,6 +475,13 @@
     <a class="nav-link" href="#visit">Visit</a>
     <a class="btn-primary" href="#visit" style="padding:10px 24px;font-size:.74rem;">Reserve a Table</a>
   </div>
+
+  <!-- Right controls -->
+  <div style="display:flex;align-items:center;gap:14px;">
+    <button class="audio-btn" id="audioBtn" onclick="toggleAudio()" title="Ambient music" aria-label="Toggle ambient music">🎵</button>
+    <button class="hamburger-btn" onclick="openMobileNav()" aria-label="Open menu" style="display:none;">☰</button>
+  </div>
+</nav>
 
 <!-- ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ -->
 <!-- ░░  SECTION 1 — HERO                         ░░ -->
@@ -1052,6 +1058,23 @@
   document.querySelectorAll('.hours-row').forEach(row => {
     if (row.dataset.day === today) row.classList.add('today');
   });
+
+  /* ── Audio toggle ────────────────── */
+  const audioBtn = document.getElementById('audioBtn');
+  let audioPlaying = false;
+  /* Replace with an actual audio URL to enable ambient sound */
+  const AUDIO_SRC = '';
+
+  function toggleAudio() {
+    if (!AUDIO_SRC) {
+      audioBtn.title = 'Ambient music — connect audio file to enable';
+      audioBtn.style.animation = 'none';
+      return;
+    }
+    audioPlaying = !audioPlaying;
+    audioBtn.classList.toggle('playing', audioPlaying);
+    audioBtn.textContent = audioPlaying ? '🔊' : '🎵';
+  }
 
   /* ── Mobile nav ──────────────────── */
   function openMobileNav() {
